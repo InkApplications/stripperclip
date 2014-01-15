@@ -17,5 +17,6 @@ class ShimLoader
     {
         require $this->shimsDirectory . '/constants.php';
         require $this->shimsDirectory . '/task.php';
+        require $this->shimsDirectory . '/remove.php';
     }
 } 
