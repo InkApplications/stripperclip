@@ -1,0 +1,13 @@
+{
+    "name": "ink/stripper-clip",
+    "license": "MIT",
+    "description": "A PHP Task Runner Tool",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.4",
+        "symfony/dependency-injection": "2.4.*",
+        "symfony/console": "2.4.*"
+    }
+}
