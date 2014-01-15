@@ -15,6 +15,7 @@ class ShimLoader
 
     public function loadShims()
     {
+        require $this->shimsDirectory . '/constants.php';
         require $this->shimsDirectory . '/task.php';
     }
 } 

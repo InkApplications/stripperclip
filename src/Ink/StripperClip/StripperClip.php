@@ -13,16 +13,18 @@ class StripperClip
 
     public function __construct(ContainerInterface $container = null)
     {
-        if (null === $container) {
-            $container = $this->buildDefaultContainer();
-        }
-
         $this->container = $container;
     }
 
     public function run()
     {
-        $app = $this->container->get('stripperclip.application');
+        echo 'Loading...';
+
+        $app = $this->getContainer()->get('stripperclip.application');
+        $app->prepare();
+
+        echo 'Done.';
+        echo "\r\033[K";
         $app->run();
     }
 
@@ -34,5 +36,14 @@ class StripperClip
         $loader->load('services.yml');
 
         return $container;
+    }
+
+    protected final function getContainer()
+    {
+        if (null === $this->container) {
+            $this->container = $this->buildDefaultContainer();
+        }
+
+        return $this->container;
     }
 } 

@@ -7,7 +7,21 @@
     },
     "require": {
         "php": ">=5.4",
-        "symfony/dependency-injection": "2.4.*",
-        "symfony/console": "2.4.*"
+        "symfony/console": "~2.4",
+        "symfony/dependency-injection": "~2.4",
+        "incenteev/composer-parameter-handler": "~2.0"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ]
+    },
+    "extra": {
+        "incenteev-parameters": {
+            "file": "src/Ink/StripperClip/Resources/config/parameters.yml"
+        }
     }
 }

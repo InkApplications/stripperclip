@@ -2,7 +2,7 @@
 
 use Ink\StripperClip\Console\Application;
 
-function task($name, $callable) {
+function task($name, $options, $callable) {
     $application = Application::getApplicationContext();
-    $application->createTask($name, $callable);
+    $application->createTask($name, $options, $callable);
 }

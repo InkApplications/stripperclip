@@ -1,7 +1,10 @@
+imports:
+    - { resource: parameters.yml }
 services:
     stripperclip.application:
         class: Ink\StripperClip\Console\Application
         arguments:
             - @stripperclip.shim_loader
+            - %version%
     stripperclip.shim_loader:
         class: Ink\StripperClip\ShimLoader

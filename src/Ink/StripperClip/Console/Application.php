@@ -31,12 +31,15 @@ class Application extends ConsoleApplication
      *
      * @api
      */
-    public function __construct(ShimLoader $shimLoader)
+    public function __construct(ShimLoader $shimLoader, $version)
     {
-        parent::__construct('StripperClip');
+        parent::__construct('StripperClip', $version);
         $this->workingDirectory = getcwd();
         $this->shimLoader = $shimLoader;
+    }
 
+    public function prepare()
+    {
         $this->loadBuildScript();
     }
 
@@ -52,9 +55,9 @@ class Application extends ConsoleApplication
         require $this->workingDirectory . '/build.clip';
     }
 
-    public function createTask($name, $callable)
+    public function createTask($name, array $options, $callable)
     {
-        $this->add(new TaskRunnerCommand($name, $callable));
+        $this->add(new TaskRunnerCommand($name, $options, $callable));
     }
 
     public static function getApplicationContext()
