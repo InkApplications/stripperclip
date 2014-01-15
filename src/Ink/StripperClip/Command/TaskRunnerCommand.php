@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class TaskRunnerCommand extends Command
 {
     const DEPENDENCY = 'dependsOn';
+    const DESCRIPTION = 'description';
     private $callable;
     private $options;
 
@@ -18,9 +19,10 @@ class TaskRunnerCommand extends Command
 
         $this->callable = $callable;
         $this->options = $options;
-    }
-    protected function configure()
-    {
+
+        if (array_key_exists(self::DESCRIPTION, $this->options)) {
+            $this->setDescription($this->options[self::DESCRIPTION]);
+        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -28,7 +30,7 @@ class TaskRunnerCommand extends Command
         $this->resolveDependencies($input, $output);
         call_user_func($this->callable);
 
-        echo "\r\n[Task] {$this->getName()} successful \r\n";
+        $output->writeln("\r\n<info>[Task] {$this->getName()} successful</info>");
     }
 
     public function resolveDependencies(InputInterface $input, OutputInterface $output)
