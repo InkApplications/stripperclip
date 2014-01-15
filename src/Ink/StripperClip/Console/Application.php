@@ -52,6 +52,14 @@ class Application extends ConsoleApplication
     {
         self::$applicationContext = $this;
         $this->shimLoader->loadShims();
+
+        $clipFile = $this->workingDirectory . '/build.clip';
+        if (false === file_exists($clipFile)) {
+            $output = new ConsoleOutput();
+            $output->write("\r\033[K");
+            $output->writeln('<error>Fatal: Could not find build.clip file</error>');
+            exit(1);
+        }
         require $this->workingDirectory . '/build.clip';
     }
 
