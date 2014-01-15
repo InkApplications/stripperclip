@@ -57,8 +57,8 @@ class Application extends ConsoleApplication
         if (false === file_exists($clipFile)) {
             $output = new ConsoleOutput();
             $output->write("\r\033[K");
-            $output->writeln('<error>Fatal: Could not find build.clip file</error>');
-            exit(1);
+            $output->writeln('<error>Could not find build.clip file</error>');
+            return;
         }
         require $this->workingDirectory . '/build.clip';
     }
