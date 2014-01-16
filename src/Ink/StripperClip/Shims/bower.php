@@ -1,8 +1,8 @@
 <?php
 
-function composer($command) {
+function bower($command) {
     $return = 0;
-    passthru('composer.phar ' . $command, $return);
+    passthru('bower ' . $command, $return);
 
     if ($return > 0) {
         throw new RuntimeException('Composer install failed');

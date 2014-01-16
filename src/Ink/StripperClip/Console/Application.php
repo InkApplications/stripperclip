@@ -3,19 +3,14 @@
 namespace Ink\StripperClip\Console;
 
 use Ink\StripperClip\Command\TaskRunnerCommand;
-use Ink\StripperClip\ShimLoader;
+
 use Symfony\Component\Console\Application as ConsoleApplication;
-use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Output\ConsoleOutputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class Application extends ConsoleApplication
 {
     private static $applicationContext;
-    private $workingDirectory;
-    private $shimLoader;
+    private $container;
 
     private static $logo = '
    _____  __         _                            ______ __ _
@@ -31,11 +26,12 @@ class Application extends ConsoleApplication
      *
      * @api
      */
-    public function __construct(ShimLoader $shimLoader, $version)
-    {
+    public function __construct(
+        ContainerInterface $container,
+        $version
+    ) {
         parent::__construct('StripperClip', $version);
-        $this->workingDirectory = getcwd();
-        $this->shimLoader = $shimLoader;
+        $this->container = $container;
     }
 
     public function prepare()
@@ -51,21 +47,21 @@ class Application extends ConsoleApplication
     public function loadBuildScript()
     {
         self::$applicationContext = $this;
-        $this->shimLoader->loadShims();
+        $shimLoader = $this->getService('stripperclip.loader.shim');
+        $shimLoader->load();
 
-        $clipFile = $this->workingDirectory . '/build.clip';
-        if (false === file_exists($clipFile)) {
-            $output = new ConsoleOutput();
-            $output->write("\r\033[K");
-            $output->writeln('<error>Could not find build.clip file</error>');
-            return;
-        }
-        require $this->workingDirectory . '/build.clip';
+        $loader = $this->getService('stripperclip.loader.clip');
+        $loader->load(getcwd() . '/build.clip');
     }
 
     public function createTask($name, array $options, $callable)
     {
         $this->add(new TaskRunnerCommand($name, $options, $callable));
+    }
+
+    public function getService($name)
+    {
+        return $this->container->get($name);
     }
 
     public static function getApplicationContext()

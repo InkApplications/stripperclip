@@ -16,16 +16,22 @@ class StripperClip
         $this->container = $container;
     }
 
-    public function run()
+    public function bootstrap()
     {
         echo 'Loading...';
+        $startTime = microtime(true);
 
         $app = $this->getContainer()->get('stripperclip.application');
+        $app->setAutoExit(false);
         $app->prepare();
 
         echo 'Done.';
         echo "\r\033[K";
         $app->run();
+
+        $endTime = microtime(true);
+        $time = $endTime - $startTime;
+        printf("Total time: %01.2f secs \r\n", $time);
     }
 
     protected function buildDefaultContainer()

@@ -27,10 +27,11 @@ class TaskRunnerCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln("<info>[Task:{$this->getName()}] Running</info>");
         $this->resolveDependencies($input, $output);
         call_user_func($this->callable);
 
-        $output->writeln("\r\n<info>[Task] {$this->getName()} successful</info>");
+        $output->writeln("<info>[Task:{$this->getName()}] successful</info>");
     }
 
     public function resolveDependencies(InputInterface $input, OutputInterface $output)

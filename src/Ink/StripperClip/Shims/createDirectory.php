@@ -2,8 +2,8 @@
 
 use Ink\StripperClip\Console\Application;
 
-function remove($name) {
+function createDirectory($name, $mode = 0777) {
     $app = Application::getApplicationContext();
     $fileSystem = $app->getService('filesystem');
-    $fileSystem->remove($name);
+    $fileSystem->mkdir($name, $mode);
 }
