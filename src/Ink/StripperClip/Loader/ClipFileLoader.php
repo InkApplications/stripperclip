@@ -29,6 +29,6 @@ class ClipFileLoader
     protected function onFileMissing()
     {
         $this->output->write("\r\033[K");
-        $this->output->writeln('<error>Could not find build.clip file</error>');
+        $this->output->writeln('<error>Could not find clip file</error>');
     }
 } 

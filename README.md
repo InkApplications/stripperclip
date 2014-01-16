@@ -13,7 +13,7 @@ Soon.
 Configuration
 -------------
 
-The build file is configured in your project's `build.clip` file.
+The build file is configured in your project's `build.clip.php` file.
 
 Example:
 

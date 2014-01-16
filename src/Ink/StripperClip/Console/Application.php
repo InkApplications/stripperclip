@@ -51,7 +51,7 @@ class Application extends ConsoleApplication
         $shimLoader->load();
 
         $loader = $this->getService('stripperclip.loader.clip');
-        $loader->load(getcwd() . '/build.clip');
+        $loader->load(getcwd() . '/build.clip.php');
     }
 
     public function createTask($name, array $options, $callable)
