@@ -2,6 +2,7 @@
 
 namespace Ink\StripperClip;
 
+use ErrorException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -20,6 +21,7 @@ class StripperClip
     {
         echo 'Loading...';
         $startTime = microtime(true);
+        $this->initErrorHandler();
 
         $app = $this->getContainer()->get('stripperclip.application');
         $app->setAutoExit(false);
@@ -32,6 +34,13 @@ class StripperClip
         $endTime = microtime(true);
         $time = $endTime - $startTime;
         printf("Total time: %01.2f secs \r\n", $time);
+    }
+
+    protected function initErrorHandler()
+    {
+        set_error_handler(function($errno, $errstr, $errfile, $errline){
+            throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+        });
     }
 
     protected function buildDefaultContainer()
