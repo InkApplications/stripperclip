@@ -2,4 +2,4 @@
 /vendor/
 /composer.phar
 /composer.lock
-parameters.yml
+/VERSION

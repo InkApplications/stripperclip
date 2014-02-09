@@ -4,6 +4,7 @@ namespace Ink\StripperClip\Console;
 
 use Ink\StripperClip\Command\TaskRunnerCommand;
 
+use Ink\StripperClip\Loader\VersionTagLoader;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -28,9 +29,9 @@ class Application extends ConsoleApplication
      */
     public function __construct(
         ContainerInterface $container,
-        $version
+        VersionTagLoader $versionLoader
     ) {
-        parent::__construct('StripperClip', $version);
+        parent::__construct('StripperClip', $versionLoader->getVersion());
         $this->container = $container;
     }
 

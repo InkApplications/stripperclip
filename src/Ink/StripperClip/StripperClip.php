@@ -45,9 +45,11 @@ class StripperClip
     protected function buildDefaultContainer()
     {
         $container = new ContainerBuilder();
-        $resourcesDir = dirname(__FILE__) . '/Resources';
+        $rootDir = __DIR__ . '/../../../';
+        $resourcesDir = __DIR__ . '/Resources';
         $configDir = $resourcesDir . '/config';
         $container->setParameter('resources.dir', $resourcesDir);
+        $container->setParameter('root.dir', $rootDir);
         $loader = new YamlFileLoader($container, new FileLocator($configDir));
         $loader->load('services.yml');
 

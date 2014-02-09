@@ -10,20 +10,6 @@
         "symfony/console": ">=2.3",
         "symfony/dependency-injection": ">=2.3",
         "symfony/filesystem": ">=2.3",
-        "symfony/finder": ">=2.3",
-        "incenteev/composer-parameter-handler": "~2.0"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ]
-    },
-    "extra": {
-        "incenteev-parameters": {
-            "file": "src/Ink/StripperClip/Resources/config/parameters.yml"
-        }
+        "symfony/finder": ">=2.3"
     }
 }

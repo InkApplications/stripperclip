@@ -1,11 +1,13 @@
-imports:
-    - { resource: parameters.yml }
 services:
+    stripperclip.version:
+        class: Ink\StripperClip\Loader\VersionTagLoader
+        arguments:
+            - %root.dir%
     stripperclip.application:
         class: Ink\StripperClip\Console\Application
         arguments:
             - @service_container
-            - %version%
+            - @stripperclip.version
     stripperclip.loader.shim:
         class: Ink\StripperClip\Loader\ShimLoader
         arguments:
