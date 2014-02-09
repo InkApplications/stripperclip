@@ -5,6 +5,6 @@ function commandLine($command, $checkReturn = true) {
     passthru($command, $return);
 
     if (true === $checkReturn && $return > 0) {
-        throw new RuntimeException('Command failed');
+        throw new RuntimeException('Command failed. Application exit code: ' . $return);
     }
 }
