@@ -6,7 +6,13 @@ if (PHP_SAPI !== 'cli') {
     echo 'Warning: StripperClip should be invoked via the CLI version of PHP, not the ' . PHP_SAPI . ' SAPI' . PHP_EOL;
 }
 
-require __DIR__ . '/../vendor/autoload.php';
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require __DIR__ . '/../vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/../../../vendor/autoload.php')) {
+    require __DIR__ . '/../../../vendor/autoload.php';
+} else {
+    die('Could not find an autoloader. Have you installed dependencies?');
+}
 
 error_reporting(-1);
 
