@@ -2,24 +2,33 @@
 
 namespace Ink\StripperClip\Loader;
 
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
+
 class ShimLoader
 {
     private $shimsDirectory;
+    private $finder;
 
-    public function __construct()
+    public function __construct(Finder $finder, $shimsDirectory)
     {
-        $this->shimsDirectory = dirname(__FILE__) . '/../Shims';
+        $this->finder = $finder;
+        $this->shimsDirectory = $shimsDirectory;
     }
 
     public function load()
     {
-        require $this->shimsDirectory . '/constants.php';
-        require $this->shimsDirectory . '/task.php';
-        require $this->shimsDirectory . '/remove.php';
-        require $this->shimsDirectory . '/createDirectory.php';
-        require $this->shimsDirectory . '/copyFile.php';
-        require $this->shimsDirectory . '/composer.php';
-        require $this->shimsDirectory . '/bower.php';
-        require $this->shimsDirectory . '/commandLine.php';
+        $files = $this->finder->files()->in($this->shimsDirectory);
+
+        foreach ($files as $file) {
+            $this->loadFile($file);
+        }
+    }
+
+    protected function loadFile(SplFileInfo $file)
+    {
+        $path = $file->getRealPath();
+
+        require $path;
     }
 } 

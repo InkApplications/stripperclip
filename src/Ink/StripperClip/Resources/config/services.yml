@@ -8,6 +8,9 @@ services:
             - %version%
     stripperclip.loader.shim:
         class: Ink\StripperClip\Loader\ShimLoader
+        arguments:
+            - @finder
+            - %resources.dir%/shims
     stripperclip.loader.clip:
         class: Ink\StripperClip\Loader\ClipFileLoader
         arguments:
@@ -19,7 +22,15 @@ services:
         class: Symfony\Component\Console\Input\ArgvInput
     filesystem:
         class: Symfony\Component\Filesystem\Filesystem
+    finder:
+        class: Symfony\Component\Finder\Finder
     stripperclip.operation.file_copier:
         class: Ink\StripperClip\Operation\FileCopier
         arguments:
             - @filesystem
+    stripperclip.dependency_resolver:
+        class: Ink\StripperClip\DependencyResolver\Resolver
+        arguments:
+            - @stripperclip.application
+            - @console.input
+            - @console.output

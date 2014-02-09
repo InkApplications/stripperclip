@@ -56,7 +56,8 @@ class Application extends ConsoleApplication
 
     public function createTask($name, array $options, $callable)
     {
-        $this->add(new TaskRunnerCommand($name, $options, $callable));
+        $resolver = $this->getService('stripperclip.dependency_resolver');
+        $this->add(new TaskRunnerCommand($resolver, $name, $options, $callable));
     }
 
     public function getService($name)

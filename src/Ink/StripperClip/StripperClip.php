@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 class StripperClip
 {
     private $container;
+    private $startTime;
 
     public function __construct(ContainerInterface $container = null)
     {
@@ -20,7 +21,7 @@ class StripperClip
     public function bootstrap()
     {
         echo 'Loading...';
-        $startTime = microtime(true);
+        $this->startTime = microtime(true);
         $this->initErrorHandler();
 
         $app = $this->getContainer()->get('stripperclip.application');
@@ -31,9 +32,7 @@ class StripperClip
         echo "\r\033[K";
         $app->run();
 
-        $endTime = microtime(true);
-        $time = $endTime - $startTime;
-        printf("Total time: %01.2f secs \r\n", $time);
+        $this->printRuntime();
     }
 
     protected function initErrorHandler()
@@ -46,7 +45,9 @@ class StripperClip
     protected function buildDefaultContainer()
     {
         $container = new ContainerBuilder();
-        $configDir = dirname(__FILE__) . '/Resources/config';
+        $resourcesDir = dirname(__FILE__) . '/Resources';
+        $configDir = $resourcesDir . '/config';
+        $container->setParameter('resources.dir', $resourcesDir);
         $loader = new YamlFileLoader($container, new FileLocator($configDir));
         $loader->load('services.yml');
 
@@ -60,5 +61,12 @@ class StripperClip
         }
 
         return $this->container;
+    }
+
+    protected function printRuntime()
+    {
+        $endTime = microtime(true);
+        $time = $endTime - $this->startTime;
+        printf("Total time: %01.2f secs \r\n", $time);
     }
 } 
