@@ -2,7 +2,7 @@ services:
     stripperclip.version:
         class: Ink\StripperClip\Loader\VersionTagLoader
         arguments:
-            - %root.dir%
+            - %dir.root%
     stripperclip.application:
         class: Ink\StripperClip\Console\Application
         arguments:
@@ -12,10 +12,12 @@ services:
         class: Ink\StripperClip\Loader\ShimLoader
         arguments:
             - @finder
-            - %resources.dir%/shims
+            - %dir.resources%/shims
     stripperclip.loader.clip:
         class: Ink\StripperClip\Loader\ClipFileLoader
         arguments:
+            - @finder
+            - %dir.cwd%
             - @console.input
             - @console.output
     console.output:
