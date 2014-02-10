@@ -29,11 +29,12 @@ class Resolver
 
     protected function runDependency($dependencyName)
     {
-        if (false === in_array($dependencyName, $this->tasksRun)) {
+        if (true === in_array($dependencyName, $this->tasksRun)) {
             return;
         }
 
         $command = $this->application->find($dependencyName);
         $command->run($this->input, $this->output);
+        $this->tasksRun[] = $dependencyName;
     }
 } 
