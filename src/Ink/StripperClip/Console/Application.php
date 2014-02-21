@@ -7,11 +7,13 @@ use Ink\StripperClip\Command\TaskRunnerCommand;
 use Ink\StripperClip\Loader\VersionTagLoader;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\Exception\RuntimeException;
 
 class Application extends ConsoleApplication
 {
     private static $applicationContext;
     private $container;
+    private $buildScriptAvailable;
 
     private static $logo = '
    _____  __         _                            ______ __ _
@@ -38,6 +40,10 @@ class Application extends ConsoleApplication
     public function prepare()
     {
         $this->loadBuildScript();
+
+        if (null !== $this->buildScriptAvailable) {
+            call_user_func($this->buildScriptAvailable);
+        }
     }
 
     public function getHelp()
@@ -53,6 +59,14 @@ class Application extends ConsoleApplication
 
         $loader = $this->getService('stripperclip.loader.clip');
         $loader->load();
+    }
+
+    public function setBuildScriptAvailable($callable) {
+        if (false === is_callable($callable)) {
+            throw new RuntimeException('buildscript must be passed a callable');
+        }
+
+        $this->buildScriptAvailable = $callable;
     }
 
     public function createTask($name, array $options, $callable)
