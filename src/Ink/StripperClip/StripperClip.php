@@ -51,6 +51,11 @@ class StripperClip
         $container->setParameter('dir.resources', $resourcesDir);
         $container->setParameter('dir.root', $rootDir);
         $container->setParameter('dir.cwd', getcwd());
+        $buildDir = getcwd() . '/.stripperclip';
+        if (false === file_exists($buildDir)) {
+            mkdir($buildDir);
+        }
+        $container->setParameter('dir.build', $buildDir);
         $loader = new YamlFileLoader($container, new FileLocator($configDir));
         $loader->load('services.yml');
 

@@ -6,9 +6,9 @@ class RemoteFile
 {
     private $basePath;
 
-    public function __construct()
+    public function __construct($buildDir)
     {
-        $this->basePath = getcwd();
+        $this->basePath = $buildDir;
     }
 
     public function makeAvailable($url)

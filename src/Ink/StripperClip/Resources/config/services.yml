@@ -34,6 +34,8 @@ services:
             - @filesystem
     stripperclip.operation.remote_file:
         class: Ink\StripperClip\Operation\RemoteFile
+        arguments:
+            - %dir.build%
     stripperclip.dependency_resolver:
         class: Ink\StripperClip\DependencyResolver\Resolver
         arguments:
