@@ -36,6 +36,10 @@ services:
         class: Ink\StripperClip\Operation\RemoteFile
         arguments:
             - %dir.build%
+    stripperclip.operation.assertions:
+        class: Ink\StripperClip\Operation\Assertions
+        arguments:
+            - %dir.build%
     stripperclip.dependency_resolver:
         class: Ink\StripperClip\DependencyResolver\Resolver
         arguments:
