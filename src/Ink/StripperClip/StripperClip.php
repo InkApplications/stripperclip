@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 /**
  * StripperClip
  *
- * Bootsrapper class for the application
+ * Bootstrapper class for the application
  *
  * @author Maxwell Vandervelde <Max@MaxVandervelde.com>
  */
