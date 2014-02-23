@@ -9,6 +9,11 @@ services:
         arguments:
             - "%dir.build%"
 
+    stripperclip.operation.tar:
+        class: Ink\StripperClip\Operation\Tar
+        arguments:
+            - @finder
+
     stripperclip.operation.assertions:
         class: Ink\StripperClip\Operation\Assertions
         arguments:
