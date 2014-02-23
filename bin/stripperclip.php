@@ -1,4 +1,12 @@
 <?php
+/**
+ * stripperclip.php
+ *
+ * Bootstrapper for stripperclip cli application
+ *
+ * @license MIT <http://opensource.org/licenses/MIT>
+ * @author Maxwell Vandervelde <Max@MaxVandervelde.com>
+ */
 
 use Ink\StripperClip\StripperClip;
 

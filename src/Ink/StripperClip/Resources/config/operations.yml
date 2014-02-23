@@ -1,0 +1,15 @@
+services:
+    stripperclip.operation.file_copier:
+        class: Ink\StripperClip\Operation\FileCopier
+        arguments:
+            - "@filesystem"
+
+    stripperclip.operation.remote_file:
+        class: Ink\StripperClip\Operation\RemoteFile
+        arguments:
+            - "%dir.build%"
+
+    stripperclip.operation.assertions:
+        class: Ink\StripperClip\Operation\Assertions
+        arguments:
+            - "%dir.build%"

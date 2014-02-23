@@ -1,0 +1,9 @@
+services:
+    console.output:
+        class: Symfony\Component\Console\Output\ConsoleOutput
+    console.input:
+        class: Symfony\Component\Console\Input\ArgvInput
+    filesystem:
+        class: Symfony\Component\Filesystem\Filesystem
+    finder:
+        class: Symfony\Component\Finder\Finder

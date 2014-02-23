@@ -1,4 +1,12 @@
 #!/usr/bin/env php
 <?php
+/**
+ * stripperclip
+ *
+ * this file is an executable cli shim for loading the bootstrapper
+ *
+ * @license MIT <http://opensource.org/licenses/MIT>
+ * @author Maxwell Vandervelde <Max@MaxVandervelde.com>
+ */
 
 include __DIR__ . '/stripperclip.php';

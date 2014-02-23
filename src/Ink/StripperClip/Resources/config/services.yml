@@ -1,48 +1,35 @@
+imports:
+    - { resource: operations.yml }
+    - { resource: symfony_components.yml }
 services:
     stripperclip.version:
         class: Ink\StripperClip\Loader\VersionTagLoader
         arguments:
-            - %dir.root%
+            - "%dir.root%"
+
     stripperclip.application:
         class: Ink\StripperClip\Console\Application
         arguments:
-            - @service_container
-            - @stripperclip.version
+            - "@service_container"
+            - "@stripperclip.version"
+
     stripperclip.loader.shim:
         class: Ink\StripperClip\Loader\ShimLoader
         arguments:
-            - @finder
-            - %dir.resources%/shims
+            - "@finder"
+            - "%dir.resources%/shims"
+
     stripperclip.loader.clip:
         class: Ink\StripperClip\Loader\ClipFileLoader
         arguments:
-            - @finder
-            - %dir.cwd%
-            - @console.input
-            - @console.output
-    console.output:
-        class: Symfony\Component\Console\Output\ConsoleOutput
-    console.input:
-        class: Symfony\Component\Console\Input\ArgvInput
-    filesystem:
-        class: Symfony\Component\Filesystem\Filesystem
-    finder:
-        class: Symfony\Component\Finder\Finder
-    stripperclip.operation.file_copier:
-        class: Ink\StripperClip\Operation\FileCopier
-        arguments:
-            - @filesystem
-    stripperclip.operation.remote_file:
-        class: Ink\StripperClip\Operation\RemoteFile
-        arguments:
-            - %dir.build%
-    stripperclip.operation.assertions:
-        class: Ink\StripperClip\Operation\Assertions
-        arguments:
-            - %dir.build%
+            - "@finder"
+            - "%dir.cwd%"
+            - "@console.input"
+            - "@console.output"
+
     stripperclip.dependency_resolver:
         class: Ink\StripperClip\DependencyResolver\Resolver
         arguments:
-            - @stripperclip.application
-            - @console.input
-            - @console.output
+            - "@stripperclip.application"
+            - "@console.input"
+            - "@console.output"
