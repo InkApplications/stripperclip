@@ -4,6 +4,8 @@ services:
     console.input:
         class: Symfony\Component\Console\Input\ArgvInput
     filesystem:
+        scope: prototype
         class: Symfony\Component\Filesystem\Filesystem
     finder:
+        scope: prototype
         class: Symfony\Component\Finder\Finder

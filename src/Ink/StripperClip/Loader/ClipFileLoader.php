@@ -82,7 +82,7 @@ class ClipFileLoader
     {
         $clipFileSignature = '*.clip.php';
         $files = $this->finder->files();
-        $files->in($this->directory)->name($clipFileSignature);
+        $files->in($this->directory)->name($clipFileSignature)->depth(0);
 
         foreach ($files as $clipFile) {
             $this->loadFile($clipFile);
