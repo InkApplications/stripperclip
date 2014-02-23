@@ -15,6 +15,6 @@ task('install', [dependsOn => ['prepare']], function() {
 });
 
 task('compile', [dependsOn => ['install']], function() {
-    commandLine("phar pack -f build/clip.phar -s .phar/stub.php -b '/usr/bin/env php' .");
+    commandLine("phar pack -x '.git|build' -f build/clip.phar -s .phar/stub.php -b '/usr/bin/env php' .");
 });
 

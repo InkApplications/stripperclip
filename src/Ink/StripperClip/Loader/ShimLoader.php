@@ -67,7 +67,7 @@ class ShimLoader
      */
     protected function loadFile(SplFileInfo $file)
     {
-        $path = $file->getRealPath();
+        $path = $this->shimsDirectory . $file->getRelativePath() . '/' . $file->getFilename();
 
         require $path;
     }
