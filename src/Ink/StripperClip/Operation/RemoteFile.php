@@ -60,13 +60,14 @@ class RemoteFile
      * After the file has been available, it executes it.
      *
      * @param string $url The url of the file to fetch
+     * @param string $arguments The arguments to pass into the php script call
      */
-    public function makeAvailableAndExecute($url)
+    public function makeAvailableAndExecute($url, $arguments = '')
     {
         $this->makeAvailable($url);
 
         $fileName = $this->getFileDestination($url);
-        exec($fileName);
+        passthru($fileName . ' ' . $arguments);
     }
 
     /**
@@ -76,13 +77,14 @@ class RemoteFile
      * then cleans up the file.
      *
      * @param string $url the URL of the remote PHP file to execute
+     * @param string $arguments The arguments to pass into the php script call
      */
-    public function executeRemotePhp($url)
+    public function executeRemotePhp($url, $arguments = '')
     {
         $this->makeAvailable($url);
         $fileName = $this->getFileDestination($url);
 
-        passthru('php ' . $fileName);
+        passthru('php ' . $fileName . ' ' . $arguments);
         remove($fileName);
     }
 

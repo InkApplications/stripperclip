@@ -97,6 +97,7 @@ class StripperClip
         $container->setParameter('dir.resources', $resourcesDir);
         $container->setParameter('dir.root', $rootDir);
         $container->setParameter('dir.cwd', getcwd());
+        $container->setParameter('dir.bin', getcwd() . '/bin');
         $buildDir = getcwd() . '/build';
         if (false === file_exists($buildDir)) {
             mkdir($buildDir);

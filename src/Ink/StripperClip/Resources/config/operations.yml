@@ -18,3 +18,10 @@ services:
         class: Ink\StripperClip\Operation\Assertions
         arguments:
             - "%dir.build%"
+
+    stripperclip.operation.composer:
+        class: Ink\StripperClip\Operation\Composer
+        arguments:
+            - "%dir.bin%"
+            - "@stripperclip.operation.remote_file"
+            - "@console.output"
